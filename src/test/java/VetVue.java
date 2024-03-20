@@ -4,12 +4,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.List;
+import java.util.Random;
 
 public class VetVue {
 
@@ -126,7 +129,6 @@ public class VetVue {
         actions.moveToElement(top1).sendKeys(Keys.HOME).perform();
 
 
-
     }
 
 
@@ -153,7 +155,6 @@ public class VetVue {
         // Click again on toggle button
         Thread.sleep(3500);
         daytoogle.click();
-
 
 
         // Click on 14 days
@@ -201,192 +202,251 @@ public class VetVue {
         WebElement upload = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@type='submit']")));
         upload.click();
 
+
+        // Send values in PetName to create
+        WebElement petname = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='add_pet_name']")));
+        petname.sendKeys(" Happy");
+
+
+
+        // Send value in Pet Family text box
+        WebElement petfamily = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='add_pet_family']")));
+        petfamily.sendKeys("Canedie Family");
+
+
+        //enter Value in Breed name
+            WebElement breed = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='add_pet_breed']")));
+            breed.sendKeys(" Hukky");
+
+            // Enter values in Age
+        WebElement age=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='add_pet_age']")));
+        age.sendKeys("3 years");
+
+
+        // Enter weight
+        WebElement weight=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='add_pet_weight']")));
+        weight.sendKeys("2 Pounds");
+
+
+        // Enter Clinic Name
+        WebElement clinicname=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='add_pet_clinic']")));
+        clinicname.sendKeys("The best Dogs clinic by exp");
+
+
+        // Now select different value from dropdown
+        WebElement devicedropdownbutton=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@title='Select Device']")));
+        devicedropdownbutton.click();
+
+        // Select a value from dropdown
+        WebElement devicedropdown=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='bs-select-2-1']")));
+        devicedropdown.click();
+
+
+        // Select pet type
+        WebElement pettypdropdown=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@title='Select Pet Type']")));
+        pettypdropdown.click();
+
+        // Select Dog from Dropdown
+        WebElement petdropdown=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='bs-select-3-2']")));
+        petdropdown.click();
+
+
+        // Select Gender from dropdown
+        WebElement gender=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@title='Select Gender']")));
+        gender.click();
+
+        // Select Female from dropdown s
+        WebElement genderselect=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='bs-select-4-2']")));
+        genderselect.click();
+
+        Thread.sleep(2000);
+
+        
         // Click on cross button to close it
 
-        WebElement close = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='text-lightGray font-size24px'])[5]")));
-        close.click();
+            WebElement close = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='text-lightGray font-size24px'])[5]")));
+            close.click();
 
+        }
+
+        @Test(priority = 5)
+        void Highrisk () throws InterruptedException {
+            Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+                    .withTimeout(Duration.ofSeconds(20))
+                    .pollingEvery(Duration.ofSeconds(2))
+                    .ignoring(NoSuchElementException.class);
+
+            Thread.sleep(1500);
+
+            //Click on High Risk tab button
+            WebElement highrisk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='ex1-tab-2']")));
+            highrisk.click();
+
+            Thread.sleep(1500);
+
+            //Again click on All
+            WebElement all = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='ex1-tab-1']")));
+            all.click();
+
+        }
+        @Test(priority = 6)
+        void clickonbell () throws InterruptedException {
+            Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+                    .withTimeout(Duration.ofSeconds(20))
+                    .pollingEvery(Duration.ofSeconds(2))
+                    .ignoring(NoSuchElementException.class);
+            Actions actions = new Actions(driver);
+
+            // Here check the functionality of  bell icon on given entries
+            WebElement bellicon = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@class='me-2 text-decoration-none position-relative']")));
+            bellicon.click();
+
+            // Scroll to end using Action class
+            Thread.sleep(2500);
+            WebElement end = wait.until(ExpectedConditions.elementToBeClickable(By.tagName("body")));
+            actions.moveToElement(end).sendKeys(Keys.END).perform();
+
+            Thread.sleep(2000);
+
+            //Scroll to the top using Action class
+            WebElement top = wait.until(ExpectedConditions.elementToBeClickable(By.tagName("body")));
+            actions.moveToElement(top).sendKeys(Keys.HOME).perform();
+
+            Thread.sleep(2000);
+        }
+
+        @Test(priority = 7)
+        void NotificationSetting () {
+            Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+                    .withTimeout(Duration.ofSeconds(20))
+                    .pollingEvery(Duration.ofSeconds(2))
+                    .ignoring(NoSuchElementException.class);
+
+            // Notification check list
+            // Click on Notification setting from Menu
+
+            WebElement notificationsetting = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@style='padding-bottom: 0.6rem']")));
+            notificationsetting.click();
+
+            // Click on Device toggle button
+            WebElement device = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@class='filter-option-inner-inner']")));
+            device.click();
+
+            // Click on Condition toggle button
+
+            WebElement condition = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='filter-option-inner-inner'])[2]")));
+            condition.click();
+
+            // Click on Days toggle button
+            WebElement days = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='filter-option-inner-inner'])[3]")));
+            days.click();
+
+            // Click on Range Scenario toggle button
+            WebElement Rangescenario = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='filter-option-inner-inner'])[4]")));
+            Rangescenario.click();
+
+            //Click on Priority toggle button
+            WebElement priority = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='filter-option-inner-inner'])[5]")));
+            priority.click();
+
+
+        }
+
+        @Test(priority = 8)
+        void crud () throws InterruptedException {
+            Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+                    .withTimeout(Duration.ofSeconds(20))
+                    .pollingEvery(Duration.ofSeconds(2))
+                    .ignoring(NoSuchElementException.class);
+
+            // Check that the edit and delete button on value is working as expected
+
+            // Click on edit
+
+            WebElement edit = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@class='cursor-point']")));
+            edit.click();
+
+            // Click on Device dropdown button in edit's dialogbox
+            WebElement device = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='filter-option-inner-inner'])[9]")));
+            device.click();
+
+            // Click on condition in dialogbox
+            WebElement condition = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='filter-option-inner-inner'])[10]")));
+            condition.click();
+
+            // Click on days in dialogbox
+            WebElement days = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='filter-option-inner-inner'])[11]")));
+            days.click();
+
+            // Click on Range scenario in dialogbox
+            WebElement rangescenario = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='filter-option-inner-inner'])[12]")));
+            rangescenario.click();
+
+            // Click on update button in dialgobox
+            WebElement update = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='btn btn-primary pe-5 ps-5'])[5]")));
+            update.click();
+
+            Thread.sleep(1000);
+
+            // Now close the dialog box
+            // WebElement close=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='bi bi-x-circle'])[6]")));
+            //close.click();
+
+
+            // Now check delete button functionality
+
+            WebElement delete = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='cursor-point'])[2]")));
+            delete.click();
+
+            // Click on cross button to close delete dialog box
+            WebElement cross = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='text-lightGray font-size24px'])[8]")));
+            cross.click();
+
+        }
+
+        @Test(priority = 9)
+        void Notification () throws InterruptedException {
+            Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+                    .withTimeout(Duration.ofSeconds(20))
+                    .pollingEvery(Duration.ofSeconds(2))
+                    .ignoring(NoSuchElementException.class);
+            Actions actions = new Actions(driver);
+
+            // Here we check notification screen
+            // Click on All notification button from menu bar
+            WebElement notificationscreen = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='nav-link border-radius-10px  d-flex align-items-center '])[2]")));
+            notificationscreen.click();
+
+            // Enter some value in Search bar to check its functionality
+            WebElement search = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@type='search']")));
+            search.sendKeys("Testing search bar by Mr.Arif");
+
+            Thread.sleep(2000);
+
+
+            // Now click on priority dropdown button
+            WebElement priority = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@type='button']")));
+            priority.click();
+
+
+        }
+        @Test(priority = 10)
+        void logout () {
+            Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+                    .withTimeout(Duration.ofSeconds(20))
+                    .pollingEvery(Duration.ofSeconds(2))
+                    .ignoring(NoSuchElementException.class);
+
+            // Now test that our logout functionality is working fine
+
+            //Click on Logout button dropdown
+
+            WebElement logoutdropdown = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@class='dropdown']")));
+            logoutdropdown.click();
+
+            //Now click on Logout button
+            WebElement logout = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@class='dropdown-item']")));
+            logout.click();
+
+        }
     }
-
-    @Test(priority = 5)
-    void Highrisk() throws InterruptedException {
-        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-                .withTimeout(Duration.ofSeconds(20))
-                .pollingEvery(Duration.ofSeconds(2))
-                .ignoring(NoSuchElementException.class);
-
-        Thread.sleep(1500);
-
-        //Click on High Risk tab button
-        WebElement highrisk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='ex1-tab-2']")));
-        highrisk.click();
-
-        Thread.sleep(1500);
-
-        //Again click on All
-        WebElement all = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='ex1-tab-1']")));
-        all.click();
-
-    }
-    @Test(priority = 6)
-    void clickonbell() throws InterruptedException {
-        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-                .withTimeout(Duration.ofSeconds(20))
-                .pollingEvery(Duration.ofSeconds(2))
-                .ignoring(NoSuchElementException.class);
-        Actions actions = new Actions(driver);
-
-        // Here check the functionality of  bell icon on given entries
-        WebElement bellicon=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@class='me-2 text-decoration-none position-relative']")));
-        bellicon.click();
-
-        // Scroll to end using Action class
-        Thread.sleep(2500);
-        WebElement end = wait.until(ExpectedConditions.elementToBeClickable(By.tagName("body")));
-        actions.moveToElement(end).sendKeys(Keys.END).perform();
-
-        Thread.sleep(2000);
-
-        //Scroll to the top using Action class
-        WebElement top = wait.until(ExpectedConditions.elementToBeClickable(By.tagName("body")));
-        actions.moveToElement(top).sendKeys(Keys.HOME).perform();
-
-        Thread.sleep(2000);
-    }
-
-    @Test(priority = 7)
-    void NotificationSetting() {
-        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-                .withTimeout(Duration.ofSeconds(20))
-                .pollingEvery(Duration.ofSeconds(2))
-                .ignoring(NoSuchElementException.class);
-
-        // Notification check list
-        // Click on Notification setting from Menu
-
-        WebElement notificationsetting = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@style='padding-bottom: 0.6rem']")));
-        notificationsetting.click();
-
-        // Click on Device toggle button
-        WebElement device = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@class='filter-option-inner-inner']")));
-        device.click();
-
-        // Click on Condition toggle button
-
-        WebElement condition = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='filter-option-inner-inner'])[2]")));
-        condition.click();
-
-        // Click on Days toggle button
-        WebElement days = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='filter-option-inner-inner'])[3]")));
-        days.click();
-
-        // Click on Range Scenario toggle button
-        WebElement Rangescenario = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='filter-option-inner-inner'])[4]")));
-        Rangescenario.click();
-
-        //Click on Priority toggle button
-        WebElement priority = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='filter-option-inner-inner'])[5]")));
-        priority.click();
-
-
-    }
-
-    @Test(priority = 8)
-    void crud() throws InterruptedException {
-        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-                .withTimeout(Duration.ofSeconds(20))
-                .pollingEvery(Duration.ofSeconds(2))
-                .ignoring(NoSuchElementException.class);
-
-        // Check that the edit and delete button on value is working as expected
-
-        // Click on edit
-
-        WebElement edit=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@class='cursor-point']")));
-        edit.click();
-
-        // Click on Device dropdown button in edit's dialogbox
-        WebElement device=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='filter-option-inner-inner'])[9]")));
-        device.click();
-
-        // Click on condition in dialogbox
-        WebElement condition=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='filter-option-inner-inner'])[10]")));
-        condition.click();
-
-        // Click on days in dialogbox
-        WebElement days=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='filter-option-inner-inner'])[11]")));
-        days.click();
-
-        // Click on Range scenario in dialogbox
-        WebElement rangescenario=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='filter-option-inner-inner'])[12]")));
-        rangescenario.click();
-
-        // Click on update button in dialgobox
-        WebElement update=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='btn btn-primary pe-5 ps-5'])[5]")));
-        update.click();
-
-        Thread.sleep(1000);
-
-        // Now close the dialog box
-       // WebElement close=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='bi bi-x-circle'])[6]")));
-        //close.click();
-
-
-
-        // Now check delete button functionality
-
-        WebElement delete=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='cursor-point'])[2]")));
-        delete.click();
-
-        // Click on cross button to close delete dialog box
-        WebElement cross=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='text-lightGray font-size24px'])[8]")));
-        cross.click();
-
-    }
-
-    @Test(priority = 9)
-    void Notification() throws InterruptedException {
-        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-                .withTimeout(Duration.ofSeconds(20))
-                .pollingEvery(Duration.ofSeconds(2))
-                .ignoring(NoSuchElementException.class);
-        Actions actions = new Actions(driver);
-
-        // Here we check notification screen
-        // Click on All notification button from menu bar
-        WebElement notificationscreen=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='nav-link border-radius-10px  d-flex align-items-center '])[2]")));
-        notificationscreen.click();
-
-        // Enter some value in Search bar to check its functionality
-        WebElement search=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@type='search']")));
-        search.sendKeys("Testing search bar by Mr.Arif");
-
-        Thread.sleep(2000);
-
-
-        // Now click on priority dropdown button
-        WebElement priority=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@type='button']")));
-        priority.click();
-
-
-    }
-    @Test(priority = 10)
-    void logout (){
-        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-                .withTimeout(Duration.ofSeconds(20))
-                .pollingEvery(Duration.ofSeconds(2))
-                .ignoring(NoSuchElementException.class);
-
-        // Now test that our logout functionality is working fine
-
-        //Click on Logout button dropdown
-
-        WebElement logoutdropdown=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@class='dropdown']")));
-        logoutdropdown.click();
-
-        //Now click on Logout button
-        WebElement logout=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@class='dropdown-item']")));
-        logout.click();
-
-    }
-}
