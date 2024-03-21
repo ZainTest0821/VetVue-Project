@@ -4,15 +4,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.time.Duration;
-import java.util.List;
-import java.util.Random;
 
 public class VetVue {
 
@@ -184,7 +182,7 @@ public class VetVue {
     }
 
     @Test(priority = 4)
-    void create() throws InterruptedException {
+    void create() throws InterruptedException, IOException {
         Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
                 .withTimeout(Duration.ofSeconds(20))
                 .pollingEvery(Duration.ofSeconds(2))
@@ -205,27 +203,27 @@ public class VetVue {
 
         // Send values in PetName to create
         WebElement petname = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='add_pet_name']")));
-        petname.sendKeys(" Happy");
+        petname.sendKeys(" Romeo");
 
 
 
         // Send value in Pet Family text box
         WebElement petfamily = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='add_pet_family']")));
-        petfamily.sendKeys("Canedie Family");
+        petfamily.sendKeys("German Family");
 
 
         //enter Value in Breed name
             WebElement breed = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='add_pet_breed']")));
-            breed.sendKeys(" Hukky");
+            breed.sendKeys(" German");
 
             // Enter values in Age
         WebElement age=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='add_pet_age']")));
-        age.sendKeys("3 years");
+        age.sendKeys("2 years");
 
 
         // Enter weight
         WebElement weight=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='add_pet_weight']")));
-        weight.sendKeys("2 Pounds");
+        weight.sendKeys("40lbs");
 
 
         // Enter Clinic Name
@@ -255,17 +253,31 @@ public class VetVue {
         WebElement gender=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@title='Select Gender']")));
         gender.click();
 
-        // Select Female from dropdown s
-        WebElement genderselect=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='bs-select-4-2']")));
+        // Select Male from dropdown s
+        WebElement genderselect=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='bs-select-4-1']")));
         genderselect.click();
 
-        Thread.sleep(2000);
+        // Select the option which is different in selecting male and female
+        WebElement optionseclect=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='not-neutered']")));
+        optionseclect.click();
 
-        
-        // Click on cross button to close it
 
-            WebElement close = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='text-lightGray font-size24px'])[5]")));
-            close.click();
+        // Select File for upload
+        // Click on Upload button
+
+        WebElement uploadbutton=wait.until(ExpectedConditions.elementToBeClickable(By.className("input-file-container")));
+        uploadbutton.click();
+
+        // Path of file
+        String filepath= "C:\\Users\\Admin\\Downloads\\VetVue\\Upload Pet Image.exe";
+        Runtime.getRuntime().exec(filepath);
+
+        Thread.sleep(8000);
+
+
+        upload.click();
+
+        Thread.sleep(12000);
 
         }
 
@@ -275,7 +287,6 @@ public class VetVue {
                     .withTimeout(Duration.ofSeconds(20))
                     .pollingEvery(Duration.ofSeconds(2))
                     .ignoring(NoSuchElementException.class);
-
             Thread.sleep(1500);
 
             //Click on High Risk tab button
@@ -316,7 +327,7 @@ public class VetVue {
         }
 
         @Test(priority = 7)
-        void NotificationSetting () {
+        void NotificationSetting () throws InterruptedException {
             Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
                     .withTimeout(Duration.ofSeconds(20))
                     .pollingEvery(Duration.ofSeconds(2))
@@ -331,26 +342,151 @@ public class VetVue {
             // Click on Device toggle button
             WebElement device = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@class='filter-option-inner-inner']")));
             device.click();
+            // Click in Animo
+            WebElement animo=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='bs-select-1-0']")));
+            animo.click();
 
-            // Click on Condition toggle button
+            Thread.sleep(1000);
+            device.click();
 
+            //Click on Waldo
+            WebElement waldo=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='bs-select-1-1']")));
+            waldo.click();
+
+
+
+
+
+            // Click on Condition dropdown button
             WebElement condition = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='filter-option-inner-inner'])[2]")));
             condition.click();
 
-            // Click on Days toggle button
+            // Select Distance Travels
+            WebElement distance=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='bs-select-2-0']")));
+            distance.click();
+
+            Thread.sleep(2000);
+
+            // Select Active
+            /*WebElement active=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='bs-select-2-1']")));
+            //active.click();
+
+
+            // Select Calories Burned
+            WebElement calories=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='bs-select-2-2']")));
+            calories.click();
+
+            Thread.sleep(2000);
+             */
+
+
+
+            // Click on Days dropdown button
             WebElement days = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='filter-option-inner-inner'])[3]")));
             days.click();
+
+            // Select 7days
+            WebElement day7=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='bs-select-3-0']")));
+            day7.click();
+
+            Thread.sleep(2000);
+            days.click();
+
+            // Select 14 Days
+            WebElement day14=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='bs-select-3-1']")));
+            day14.click();
+
+            Thread.sleep(2000);
+            days.click();
+            Thread.sleep(1500);
+
+            // Select 30 days
+            WebElement day30=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='bs-select-3-2']")));
+            day30.click();
+
+            Thread.sleep(2000);
+            days.click();
+            Thread.sleep(1000);
+
+            // Select  90 days
+            WebElement day90=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='bs-select-3-3']")));
+            day90.click();
+
+            Thread.sleep(2000);
+
+
+
+
 
             // Click on Range Scenario toggle button
             WebElement Rangescenario = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='filter-option-inner-inner'])[4]")));
             Rangescenario.click();
 
+            // Select Up/Down
+            WebElement updown=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='bs-select-4-0']")));
+            updown.click();
+
+
+            Thread.sleep(2000);
+            Rangescenario.click();
+            Thread.sleep(1000);
+
+            // Select Up
+            WebElement up=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='bs-select-4-1']")));
+            up.click();
+
+            Thread.sleep(2000);
+            Rangescenario.click();
+            Thread.sleep(1000);
+
+            // Select Down
+            WebElement down=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='bs-select-4-2']")));
+            down.click();
+
+            Thread.sleep(2000);
+
+
             //Click on Priority toggle button
             WebElement priority = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='filter-option-inner-inner'])[5]")));
             priority.click();
 
+            // Select High
+            WebElement high=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='bs-select-5-0']")));
+            high.click();
 
+            Thread.sleep(2000);
+            priority.click();
+            Thread.sleep(1000);
+
+            // Select Medium
+            WebElement medium=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='bs-select-5-1']")));
+            medium.click();
+
+            Thread.sleep(2000);
+            priority.click();
+            Thread.sleep(1000);
+
+
+            // Select Low
+            WebElement low=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='bs-select-5-2']")));
+            low.click();
+
+
+
+
+            // Send Value in Percentage textbox
+            WebElement percentage=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='per_notify']")));
+            percentage.sendKeys("50");
+
+
+
+            //Click on Add  button
+            WebElement add=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@class='btn btn-primary pe-5 ps-5 mb-1']")));
+            add.click();
+
+            Thread.sleep(4000);
         }
+
 
         @Test(priority = 8)
         void crud () throws InterruptedException {

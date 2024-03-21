@@ -5,15 +5,10 @@
     <classes>
       <class name="VetVue">
         <methods>
-          <include name="logout"/>
-          <include name="crud"/>
-          <include name="NotificationSetting"/>
+          <include name="date"/>
           <include name="Launch"/>
-          <include name="Notification"/>
+          <include name="AllCheck"/>
           <include name="teardown"/>
-          <include name="Highrisk"/>
-          <include name="clickonbell"/>
-          <include name="create"/>
         </methods>
       </class> <!-- VetVue -->
     </classes>
